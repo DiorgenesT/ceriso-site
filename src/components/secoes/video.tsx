@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, type ReactNode } from "react";
 import Image from "next/image";
 import { Play, X } from "lucide-react";
 import { ceriso } from "@/content/institucional";
@@ -8,12 +8,24 @@ import { gsap, useGSAP, prefereMenosMovimento } from "@/lib/gsap";
 import { TituloAnimado } from "@/components/motion/titulo-animado";
 import { Rotulo } from "@/components/motion/rotulo";
 
-const { video } = ceriso;
+type InfoVideo = {
+  arquivo: string | null;
+  poster: string;
+  legendas: string | null;
+  embedInstagram: string | null;
+  titulo: string;
+};
 
-// Bloco de vídeo institucional. O vídeo toca dentro do site, numa janela sobre a página:
-// o arquivo próprio quando houver (rápido, sem rastreadores) ou o player oficial do
-// Instagram, que só é carregado depois do clique.
-export function Video() {
+// Bloco de vídeo com capa grande. O vídeo toca dentro do site, numa janela sobre a página:
+// arquivo próprio quando houver (rápido, sem rastreadores, com legendas) ou o player oficial
+// do Instagram, carregado só depois do clique.
+// Padrão: a apresentação institucional na home. Outras páginas passam o vídeo e os textos.
+export function Video({
+  video = ceriso.video,
+  rotulo = `Vídeo · ${ceriso.video.duracao}`,
+  titulo = <>Conheça o <span className="text-rio">CERISO</span> em um minuto e meio.</>,
+  texto = "A história, a atuação e o propósito do consórcio que une 29 municípios da Bacia do Sorocaba e Médio Tietê.",
+}: { video?: InfoVideo; rotulo?: string; titulo?: ReactNode; texto?: string }) {
   const ref = useRef<HTMLElement>(null);
   const janela = useRef<HTMLDialogElement>(null);
   const [aberto, setAberto] = useState(false);
@@ -60,14 +72,12 @@ export function Video() {
           </div>
           <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-6 p-7 md:flex-row md:items-end md:p-12">
             <div>
-              <Rotulo className="mb-4 text-rio-claro">Vídeo · Encontro de prefeitos</Rotulo>
+              <Rotulo className="mb-4 text-rio-claro">{rotulo}</Rotulo>
               <TituloAnimado as="p" className="titulo-display max-w-[14ch] text-[clamp(2.2rem,5vw,4.5rem)]">
-                A união para <span className="text-rio">fortalecer</span> os municípios.
+                {titulo}
               </TituloAnimado>
             </div>
-            <p className="max-w-xs text-papel/70">
-              Prefeitos, parceiros e especialistas reunidos para trocar experiências e soluções.
-            </p>
+            <p className="max-w-xs text-papel/70">{texto}</p>
           </div>
           {/* o cartão inteiro é o botão de assistir */}
           <button type="button" onClick={abrir} aria-haspopup="dialog" className="absolute inset-0 z-10 cursor-pointer rounded-[2.5rem]">
@@ -102,10 +112,13 @@ export function Video() {
                 controls
                 autoPlay
                 playsInline
+                crossOrigin="anonymous"
                 className="block max-h-[85svh] w-[min(92vw,70rem)] rounded-3xl bg-abismo"
-              />
+              >
+                {video.legendas && <track kind="captions" src={video.legendas} srcLang="pt-BR" label="Português" />}
+              </video>
             ) : (
-              <iframe
+              video.embedInstagram && <iframe
                 src={video.embedInstagram}
                 title={video.titulo}
                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"

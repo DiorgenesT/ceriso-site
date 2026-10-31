@@ -6,6 +6,7 @@ import { CabecalhoPagina } from "@/components/layout/cabecalho-pagina";
 import { Revelar } from "@/components/motion/revelar";
 import { TituloAnimado } from "@/components/motion/titulo-animado";
 import { ChamadaFinal } from "@/components/secoes/chamada-final";
+import { Video } from "@/components/secoes/video";
 
 export const metadata: Metadata = {
   title: "O Consórcio",
@@ -98,6 +99,12 @@ export default function Institucional() {
           </Revelar>
         </div>
       </section>
+      <Video
+        video={ceriso.encontro}
+        rotulo="Vídeo · Encontro de prefeitos"
+        titulo={<>A união para <span className="text-rio">fortalecer</span> os municípios.</>}
+        texto="Prefeitos, parceiros e especialistas reunidos para trocar experiências e soluções."
+      />
       <ChamadaFinal />
     </>
   );

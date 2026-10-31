@@ -31,14 +31,27 @@ export const ceriso = {
     facebook: "https://www.facebook.com/CBHSMT",
   },
   transparenciaTempoReal: "https://ceriso.dcfiorilli.com.br:879/transparencia/",
-  // Vídeo institucional tocado dentro do site. Com o arquivo original em mãos, rodar
-  // `npm run video -- caminho/do/video.mp4` e preencher `arquivo`; até lá, usa o player
-  // oficial do Instagram (carregado só quando a pessoa clica em assistir).
+  // Vídeo institucional tocado dentro do site: a apresentação narrada do CERISO, feita em
+  // ~/projetos/motion/ceriso (composição Apresentacao) e preparada com `npm run video`.
+  // As legendas (.vtt) saem de `npx tsx scripts/legendas-vtt.mts apresentacao` no projeto motion.
   video: {
-    arquivo: null as string | null, // ex.: "/video/institucional.mp4"
+    arquivo: "/video/institucional.mp4" as string | null,
+    poster: "/video/institucional.webp",
+    legendas: "/video/institucional.vtt" as string | null,
+    embedInstagram: null as string | null,
+    titulo: "Apresentação institucional do CERISO",
+    duracao: "1:28",
+  },
+  // Reel do encontro de prefeitos (Instagram), na página O Consórcio. Toca no player oficial
+  // do Instagram, carregado só depois do clique. Com o arquivo original em mãos, dá para
+  // hospedar aqui também (como a apresentação acima) e preencher `arquivo`.
+  encontro: {
+    arquivo: null as string | null,
     poster: "/img/fotos/assembleia-prefeitos.webp",
-    embedInstagram: "https://www.instagram.com/p/DbgK_ePxnDW/embed/",
+    legendas: null as string | null,
+    embedInstagram: "https://www.instagram.com/p/DbgK_ePxnDW/embed/" as string | null,
     titulo: "Encontro de prefeitos do CERISO",
+    duracao: null as string | null,
   },
 } as const;
 
