@@ -1,0 +1,30 @@
+# Mesmos cabeçalhos para hospedagem Apache (ex.: KingHost), caso o site fique lá.
+Options -Indexes
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Endereços antigos do WordPress
+  RewriteRule ^index\.php/portal-da-transparencia/?$ /transparencia/ [L,R=301]
+  RewriteRule ^index\.php/publicacoes-oficiais/?$ /publicacoes/ [L,R=301]
+  RewriteRule ^index\.php/portal/?$ /noticias/ [L,R=301]
+  RewriteRule ^index\.php/(estatuto|atas|convites|convocacoes|editais|resolucoes|tabela-de-servicos-medicos-ceriso)/?$ /publicacoes/ [L,R=301]
+  RewriteRule ^index\.php/(receitas|despesas|prestacao-de-contas|balancetes|contratos-administrativo|contratos-rateio)/?$ /transparencia/ [L,R=301]
+  # Posts de spam injetados no WordPress: responder 410 (removido) para sair do Google mais rápido
+  RewriteRule ^index\.php/20[0-9]{2}/ - [G,L]
+  RewriteRule ^(wp-admin|wp-login\.php|xmlrpc\.php|wp-json) - [G,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://vlibras.gov.br https://*.vlibras.gov.br; style-src 'self' 'unsafe-inline' https://vlibras.gov.br https://*.vlibras.gov.br; img-src 'self' data: blob: https://vlibras.gov.br https://*.vlibras.gov.br; font-src 'self' data: https://vlibras.gov.br https://*.vlibras.gov.br; connect-src 'self' https://vlibras.gov.br https://*.vlibras.gov.br; worker-src 'self' blob:; media-src 'self' https://*.vlibras.gov.br; frame-src https://www.instagram.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'"
+  <FilesMatch "\.(js|css|woff2|webp)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

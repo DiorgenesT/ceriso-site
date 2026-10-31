@@ -1,26 +1,152 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Paleta "bacia": água profunda, rio (o ciano #02AEF8 já usado pela marca) e mata ciliar. */
+@theme {
+  --color-abismo: #031019;
+  --color-fundo: #061a26;
+  --color-corrente: #0b2a3b;
+  --color-rio: #02aef8;
+  --color-rio-claro: #7fd8ff;
+  --color-mata: #00a390; /* verde-água da mão do logotipo */
+  --color-marinho: #00194d; /* azul do logotipo */
+  --color-agua: #0378a8; /* destaque legível sobre fundo claro */
+  --color-areia: #f3f0e8;
+  --color-papel: #faf8f3;
+  --color-tinta: #0a1a24;
+  --color-cinza: #5b6b75;
+  --color-linha: #dcd7cb;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-agua: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    background: var(--color-papel);
+    color: var(--color-tinta);
+    -webkit-text-size-adjust: 100%;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  /* O espaço da Plus Jakarta Sans é estreito (0,19em): compensa em cada elemento,
+     proporcional ao tamanho da fonte, para as palavras não colarem. */
+  :where(body, body *) {
+    word-spacing: 0.1em;
+  }
+  ::selection {
+    background: var(--color-rio);
+    color: var(--color-abismo);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-rio);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  /* Tamanho base = ajuste da barra de acessibilidade × escala de telas grandes.
+     Até 1680px de largura nada muda; acima disso o site inteiro (tudo em rem) cresce
+     aos poucos, para não ficar uma "ilha" no meio de monitores 2K/4K (2560px ≈ +33%). */
+  html {
+    --fonte-usuario: 1;
+    --extra-tela: 0px;
+    font-size: calc((100% + var(--extra-tela)) * var(--fonte-usuario));
+  }
+  html[data-fonte="maior"] {
+    --fonte-usuario: 1.125;
+  }
+  html[data-fonte="max"] {
+    --fonte-usuario: 1.25;
+  }
+  @media (min-width: 1680px) {
+    html {
+      --extra-tela: clamp(0px, (100vw - 1680px) * 0.006, 6px);
+    }
+  }
+  html[data-contraste="alto"] {
+    filter: contrast(1.25) saturate(0.6);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 3rem);
+  }
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .titulo-display {
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    word-spacing: 0.12em;
+    line-height: 0.95;
+  }
+  .grao {
+    position: relative;
+    isolation: isolate;
+  }
+  .grao::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Estado inicial dos elementos animados: só esconde quando o JS está ativo
+   e o usuário não pediu movimento reduzido. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-revelar] {
+    opacity: 0;
+  }
+}
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* período = soma do dasharray (3 + 22), senão o traço "pula" a cada volta */
+@keyframes correnteza {
+  to { stroke-dashoffset: -25; }
+}
+
+/* Mapa e cabeçalho nascem escondidos; o GSAP os revela já com a entrada montada (sem piscar).
+   Se o JS falhar, ele aparece sozinho. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .mapa-palco,
+  html.js .cabecalho-intro {
+    opacity: 0;
+    animation: reserva-visivel 0s 3s forwards;
+  }
+}
+@keyframes reserva-visivel {
+  to { opacity: 1; }
+}
+/* fora da tela, nada de correnteza nem pulso gastando quadro */
+.mapa-bacia[data-pausado] * {
+  animation-play-state: paused !important;
+}
+
+@keyframes faixa {
+  to { transform: translateX(-50%); }
+}
+
+@keyframes pulso {
+  from { transform: scale(0.4); opacity: 1; }
+  to { transform: scale(2.2); opacity: 0; }
 }
