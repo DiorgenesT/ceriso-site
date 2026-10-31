@@ -65,7 +65,7 @@ export function Cabecalho() {
     >
       <div
         className={clsx(
-          "cabecalho-intro container-site mt-3 flex h-16 items-center justify-between gap-6 rounded-full transition-all duration-500",
+          "cabecalho-intro container-site mt-3 flex h-16 items-center justify-between gap-6 rounded-full transition-[background-color,box-shadow,backdrop-filter,padding] duration-500",
           rolou && !aberto && "bg-abismo/70 shadow-[0_10px_40px_-10px_rgba(0,0,0,.5)] backdrop-blur-xl",
         )}
         style={{ maxWidth: "min(88rem, calc(100% - 1.5rem))" }}

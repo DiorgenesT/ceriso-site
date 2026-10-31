@@ -23,9 +23,14 @@ export function Revelar<T extends ElementType = "div">({ as, atraso = 0, emCasca
         return;
       }
       gsap.set(el, { opacity: 1 });
-      gsap.from(alvos, {
-        y: 48,
-        opacity: 0,
+      // fromTo com destino explícito: um gsap.from leria o estado "final" do CSS, que pode
+      // estar no meio de uma transição e deixar o card preso transparente e deslocado.
+      // No fim, limpa os estilos para o hover (translate/sombra) do próprio card funcionar.
+      // A opacidade do próprio bloco não é limpa: o CSS de [data-revelar] o esconderia de novo.
+      gsap.fromTo(alvos, { y: 48, opacity: 0 }, {
+        y: 0,
+        opacity: 1,
+        clearProps: emCascata ? "transform,translate,opacity" : "transform,translate",
         duration: 1.1,
         delay: atraso,
         stagger: 0.08,

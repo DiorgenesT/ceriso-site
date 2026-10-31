@@ -26,7 +26,7 @@ export function ListaMunicipios() {
         <p className="sr-only" aria-live="polite">{lista.length} municípios encontrados</p>
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {lista.map((m) => (
-            <li key={m.slug} className="group flex gap-5 rounded-3xl border border-linha bg-white p-6 transition-all duration-500 ease-agua hover:-translate-y-1 hover:border-rio hover:shadow-[0_24px_60px_-30px_rgba(2,174,248,.5)]">
+            <li key={m.slug} className="group flex gap-5 rounded-3xl border border-linha bg-white p-6 transition-[translate,border-color,box-shadow] duration-500 ease-agua hover:-translate-y-1 hover:border-rio hover:shadow-[0_24px_60px_-30px_rgba(2,174,248,.5)]">
               <Image src={`/img/brasoes/${m.slug}.webp`} alt={`Brasão de ${m.nome}`} width={72} height={72} className="size-18 shrink-0 object-contain transition-transform duration-500 group-hover:scale-110" />
               <div>
                 <p className="tabular-nums text-xs text-cinza">Fundação {m.fundacao}</p>

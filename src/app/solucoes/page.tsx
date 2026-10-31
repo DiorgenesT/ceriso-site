@@ -32,7 +32,7 @@ export default function Solucoes() {
               const [lic] = documentosDa(s);
               return (
                 <Link key={s.slug} href={`/solucoes/${s.slug}`}
-                  className="group flex min-h-80 flex-col rounded-[2rem] border border-linha bg-white p-8 transition-all duration-500 ease-agua hover:-translate-y-1 hover:border-marinho hover:shadow-[0_30px_60px_-30px_rgba(0,25,77,.4)]">
+                  className="group flex min-h-80 flex-col rounded-[2rem] border border-linha bg-white p-8 transition-[translate,border-color,box-shadow] duration-500 ease-agua hover:-translate-y-1 hover:border-marinho hover:shadow-[0_30px_60px_-30px_rgba(0,25,77,.4)]">
                   <div className="flex items-center justify-between">
                     <span className="eyebrow text-agua">{s.area}</span>
                     <ArrowUpRight className="size-5 text-cinza transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-tinta" aria-hidden />
