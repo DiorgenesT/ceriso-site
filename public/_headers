@@ -19,3 +19,7 @@ https://:worker.:conta.workers.dev/*
   X-Robots-Tag: noindex, nofollow
 https://:project.pages.dev/*
   X-Robots-Tag: noindex, nofollow
+
+# vídeo: o navegador guarda por um dia (o arquivo não tem hash no nome)
+/video/*
+  Cache-Control: public, max-age=86400

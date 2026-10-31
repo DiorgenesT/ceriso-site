@@ -1,11 +1,15 @@
-// Publicação na Cloudflare: Worker só com arquivos estáticos (o export do Next em ./out).
+// Publicação na Cloudflare: arquivos estáticos (o export do Next em ./out) e um Worker mínimo para /video/*.
 // Deploy: npm run build && npx wrangler deploy
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ceriso",
   "compatibility_date": "2026-10-01",
+  // Worker só para /video/* (pedidos parciais para o Safari); o resto é servido direto dos assets
+  "main": "worker/index.js",
   "assets": {
     "directory": "./out",
+    "binding": "ASSETS",
+    "run_worker_first": ["/video/*"],
     "not_found_handling": "404-page",
     "html_handling": "auto-trailing-slash"
   }
