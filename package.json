@@ -12,7 +12,8 @@
     "imagens": "node scripts/otimizar-imagens.mjs",
     "logo": "node scripts/vetorizar-logo.mjs",
     "video": "node scripts/preparar-video.mjs",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "favicon": "node scripts/gerar-favicon.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

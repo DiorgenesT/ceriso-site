@@ -127,7 +127,7 @@ export function Cabecalho() {
           <ul className="space-y-2">
             {navegacao.map((item, i) => (
               <li key={item.href} style={{ animationDelay: `${i * 50}ms` }} className="animate-[subir_.6s_var(--ease-agua)_both]">
-                <Link href={item.href} className="block border-b border-papel/10 py-3 text-3xl font-bold tracking-tight">
+                <Link href={item.href} onClick={() => setAberto(false)} className="block border-b border-papel/10 py-3 text-3xl font-bold tracking-tight">
                   {item.rotulo}
                 </Link>
               </li>
@@ -137,7 +137,7 @@ export function Cabecalho() {
         <ul className="mt-8 flex flex-wrap gap-2">
           {atalhos.map((a) => (
             <li key={a.href}>
-              <Link href={a.href} className="inline-block rounded-full border border-papel/20 px-4 py-2 text-sm text-papel/80">{a.rotulo}</Link>
+              <Link href={a.href} onClick={() => setAberto(false)} className="inline-block rounded-full border border-papel/20 px-4 py-2 text-sm text-papel/80">{a.rotulo}</Link>
             </li>
           ))}
         </ul>

@@ -36,5 +36,25 @@ export function RolagemSuave() {
     ScrollTrigger.refresh();
   }, [caminho]);
 
+  // Link para a própria página (Início ou logo estando na home, por exemplo): o Next não
+  // navega e nada rola. Nesse caso, volta ao topo com a rolagem suave.
+  useEffect(() => {
+    const aoClicar = (e: MouseEvent) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const a = (e.target as Element).closest?.("a[href]") as HTMLAnchorElement | null;
+      if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+      const url = new URL(a.href, window.location.href);
+      const semBarra = (p: string) => p.replace(/\/$/, "") || "/";
+      if (url.origin !== window.location.origin || url.hash || url.search !== window.location.search) return;
+      if (semBarra(url.pathname) !== semBarra(window.location.pathname)) return;
+      e.preventDefault();
+      if (lenis.current) lenis.current.scrollTo(0, { duration: 1.2 });
+      else window.scrollTo({ top: 0, behavior: prefereMenosMovimento() ? "auto" : "smooth" });
+    };
+    // captura: roda antes do onClick do <Link>, que marcaria o evento como tratado
+    document.addEventListener("click", aoClicar, true);
+    return () => document.removeEventListener("click", aoClicar, true);
+  }, []);
+
   return null;
 }
