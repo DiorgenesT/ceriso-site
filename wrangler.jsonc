@@ -1,0 +1,12 @@
+// Publicação na Cloudflare: Worker só com arquivos estáticos (o export do Next em ./out).
+// Deploy: npm run build && npx wrangler deploy
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ceriso",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./out",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}

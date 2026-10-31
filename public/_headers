@@ -13,9 +13,9 @@
 /img/*
   Cache-Control: public, max-age=2592000
 
-# Endereços de teste do Cloudflare Pages (*.pages.dev) não entram no Google:
+# Endereços de teste da Cloudflare (*.workers.dev e *.pages.dev) não entram no Google:
 # só o domínio oficial deve ser indexado.
-https://:project.pages.dev/*
+https://:worker.:conta.workers.dev/*
   X-Robots-Tag: noindex, nofollow
-https://:version.:project.pages.dev/*
+https://:project.pages.dev/*
   X-Robots-Tag: noindex, nofollow
