@@ -55,7 +55,7 @@ O e-mail (`MX` da KingHost) não pode ser afetado. Ao migrar o DNS, copie os reg
 
 ## Pendências de conteúdo (confirmar com o CERISO)
 
-- [ ] Logotipo oficial em vetor (SVG). Hoje o site usa uma vetorização do PNG oficial (408×165), gerada por `npm run logo` (`scripts/vetorizar-logo.mjs` → `src/components/ui/logo-geo.ts` e `public/img/marca/*.svg`). Fiel, mas as frestas entre os dedos ficaram mais discretas; com o vetor oficial, basta trocar os caminhos.
+- [ ] Logotipo oficial em vetor (SVG). Até lá, o site usa um logotipo reconstruído do PNG oficial (408×165): símbolo suavizado, "CERISO" e subtítulo em contornos da Montserrat (a fonte do logo) e dedos redesenhados. A geometria vem de `~/projetos/motion/ceriso/scripts/exportar-logo.mts` (→ `src/components/ui/logo-geo.ts`); `npm run marca` gera `public/img/marca/*` e o favicon. Com o vetor oficial, basta trocar os caminhos.
 - [ ] Diretoria 2025–2027. A home do WordPress mostra uma gestão e a notícia de posse mostra outra; o site usa a da notícia.
 - [ ] Data da notícia de posse: o WordPress exibe 10/02/2024, mas o mandato é 2025–2027.
 - [x] População: 1.983.329 habitantes (Censo IBGE 2022, soma dos 29). O site mostra "2 mi".

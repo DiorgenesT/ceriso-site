@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 export const dynamic = "force-static";
 
-// Ícones gerados por scripts/gerar-favicon.mjs (npm run favicon).
+// Ícones gerados por scripts/gerar-marca.mjs (npm run marca).
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "CERISO — Consórcio da Bacia do Rio Sorocaba e Médio Tietê",

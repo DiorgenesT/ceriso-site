@@ -10,10 +10,9 @@
     "pncp": "node scripts/sincronizar-pncp.mjs",
     "mapa": "python3 scripts/gerar-mapa.py",
     "imagens": "node scripts/otimizar-imagens.mjs",
-    "logo": "node scripts/vetorizar-logo.mjs",
     "video": "node scripts/preparar-video.mjs",
     "deploy": "npm run build && wrangler deploy",
-    "favicon": "node scripts/gerar-favicon.mjs"
+    "marca": "node scripts/gerar-marca.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

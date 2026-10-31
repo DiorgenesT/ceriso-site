@@ -28,12 +28,24 @@ function CamadasSimbolo({ id, cor, classe }: { id: string; cor: string; classe: 
   return (
     <>
       <defs>
+        <clipPath id={`${id}-sem-dedos`}>
+          <path d={logoGeo.semDedos} />
+        </clipPath>
         <g id={`${id}-verde`} className={`${classe}-verde`}>
-          {logoGeo.simboloVerde.map((d, i) => <path key={i} d={d} />)}
+          <g clipPath={`url(#${id}-sem-dedos)`}>
+            {logoGeo.simboloVerde.map((d, i) => <path key={i} d={d} />)}
+          </g>
+          {/* dedos verdes: quatro cápsulas separadas, como no desenho original */}
+          {logoGeo.capsulas.map(([cx, cy, c, e, a]) => (
+            <rect key={cx} x={cx - c / 2} y={cy - e / 2} width={c} height={e} rx={e / 2} transform={`rotate(${a} ${cx} ${cy})`} />
+          ))}
         </g>
         <mask id={`${id}-fresta`} maskUnits="userSpaceOnUse" x="-40" y="-40" width="240" height="245">
           <rect x="-40" y="-40" width="240" height="245" fill="#fff" />
           <use href={`#${id}-verde`} fill="#000" stroke="#000" strokeWidth={logoGeo.fresta * 2} strokeLinejoin="round" />
+          {/* frestas entre os dedos da mão marinho e o branco sob os dedos verdes */}
+          {logoGeo.dedos.map((d) => <path key={d} d={d} stroke="#000" strokeWidth={0.95} strokeLinecap="round" />)}
+          <path d={logoGeo.sobDedos} fill="#000" />
         </mask>
       </defs>
       <g className={classe}>
@@ -46,7 +58,8 @@ function CamadasSimbolo({ id, cor, classe }: { id: string; cor: string; classe: 
   );
 }
 
-// Logotipo vetorizado a partir do PNG oficial (scripts/vetorizar-logo.mjs).
+// Logotipo reconstruído (logo-geo.ts): símbolo suavizado do PNG oficial, letras em contornos da
+// Montserrat (a fonte do logotipo) e dedos redesenhados. Gerado em ~/projetos/motion/ceriso.
 export function Marca({ className, tom = "claro", animada = false, atraso = 0 }: Props) {
   const raiz = useRef<SVGSVGElement>(null);
   const brilho = useRef<gsap.core.Tween | null>(null);
@@ -97,7 +110,7 @@ export function Marca({ className, tom = "claro", animada = false, atraso = 0 }:
         </linearGradient>
         <g id={`${id}-tudo`}>
           {logoGeo.simbolo.map((d, i) => <path key={`b${i}`} d={d} />)}
-          {logoGeo.simboloVerde.map((d, i) => <path key={`v${i}`} d={d} />)}
+          <use href={`#${id}-verde`} />
           {logoGeo.letras.map((d, i) => <path key={`l${i}`} d={d} />)}
           <path d={logoGeo.subtitulo} />
         </g>

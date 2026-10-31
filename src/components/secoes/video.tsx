@@ -64,19 +64,24 @@ export function Video({
         <div className="video-moldura group relative aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-abismo text-papel sm:aspect-[4/3] md:aspect-[16/9]">
           <Image src={video.poster} alt="" fill sizes="100vw" className="video-img object-cover opacity-70 transition-opacity duration-700 group-hover:opacity-50" />
           <div className="absolute inset-0 bg-gradient-to-t from-abismo via-abismo/30 to-transparent" />
-          {/* play, rótulo e título no mesmo fluxo, de baixo para cima: o título nunca encobre o play */}
-          <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-6 p-7 md:flex-row md:items-end md:p-12">
+          {/* desktop: play no centro do cartão (o título é baixo o bastante para não alcançá-lo) */}
+          <div className="absolute inset-0 hidden place-items-center lg:grid">
+            <BotaoPlay />
+          </div>
+          {/* celular e tablet: play acima do texto, centralizado, no mesmo fluxo (nunca se sobrepõem) */}
+          <div className="absolute inset-x-0 bottom-0 p-7 md:p-12">
+            <div className="mb-6 flex justify-center md:mb-8 lg:hidden">
+              <BotaoPlay />
+            </div>
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
-              <span className="relative mb-6 grid size-16 place-items-center rounded-full bg-papel text-marinho shadow-2xl transition-transform duration-700 ease-agua group-hover:scale-110 md:mb-8 md:size-24">
-                <span aria-hidden className="absolute inset-0 rounded-full border-2 border-papel/60 motion-safe:animate-[pulso_2.4s_ease-out_infinite]" />
-                <Play className="ml-1 size-6 fill-current md:size-8" aria-hidden />
-              </span>
               <Rotulo className="mb-4 text-rio-claro">{rotulo}</Rotulo>
               <TituloAnimado as="p" className="titulo-display max-w-[15ch] text-[clamp(2rem,4.4vw,4.25rem)]">
                 {titulo}
               </TituloAnimado>
             </div>
             <p className="max-w-xs text-papel/70 sm:hidden md:block">{texto}</p>
+            </div>
           </div>
           {/* o cartão inteiro é o botão de assistir */}
           <button type="button" onClick={abrir} aria-haspopup="dialog" className="absolute inset-0 z-10 cursor-pointer rounded-[2.5rem]">
@@ -127,5 +132,15 @@ export function Video({
         </div>
       </dialog>
     </section>
+  );
+}
+
+// Botão de play (decorativo: o cartão inteiro é o botão de assistir).
+function BotaoPlay() {
+  return (
+    <span aria-hidden className="relative grid size-16 place-items-center rounded-full bg-papel text-marinho shadow-2xl transition-transform duration-700 ease-agua group-hover:scale-110 md:size-24 lg:size-28">
+      <span className="absolute inset-0 rounded-full border-2 border-papel/60 motion-safe:animate-[pulso_2.4s_ease-out_infinite]" />
+      <Play className="ml-1 size-6 fill-current md:size-8 lg:size-10" />
+    </span>
   );
 }
