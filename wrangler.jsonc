@@ -6,6 +6,11 @@
   "compatibility_date": "2026-10-01",
   // Worker só para /video/* (pedidos parciais para o Safari); o resto é servido direto dos assets
   "main": "worker/index.js",
+  // Domínios de produção (zona ceriso.com.br na conta Cloudflare dgtssk8@hotmail.com)
+  "routes": [
+    { "pattern": "ceriso.com.br", "custom_domain": true },
+    { "pattern": "www.ceriso.com.br", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./out",
     "binding": "ASSETS",

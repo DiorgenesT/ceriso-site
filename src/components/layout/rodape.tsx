@@ -70,6 +70,17 @@ export function Rodape() {
         <div className="flex flex-col justify-between gap-3 border-t border-papel/10 py-6 text-xs text-papel/40 sm:flex-row">
         <p>© {new Date().getFullYear()} CERISO. Todos os direitos reservados.</p>
         <p>Bacia do Rio Sorocaba e Médio Tietê · São Paulo</p>
+        <p>
+          Desenvolvido por{" "}
+          <a
+            href="https://diorgenesgeorge.dev"
+            target="_blank"
+            rel="noopener"
+            className="text-papel/60 underline decoration-papel/20 underline-offset-4 transition-colors hover:text-rio hover:decoration-rio"
+          >
+            Diorgenes George
+          </a>
+        </p>
         </div>
       </div>
     </footer>
