@@ -17,18 +17,18 @@ export function Login() {
 
   const campo = "w-full rounded-2xl border border-linha bg-white px-5 py-4 outline-none transition-colors focus:border-tinta";
   return (
-    <form onSubmit={entrar} className="rounded-[2rem] bg-marinho p-8 text-papel md:p-10" noValidate>
+    <form onSubmit={entrar} autoComplete="off" className="rounded-[2rem] bg-marinho p-8 text-papel md:p-10" noValidate>
       <h2 className="text-2xl font-bold">Entrar</h2>
       <p className="mt-2 text-sm text-papel/60">Use o e-mail institucional cadastrado pelo seu município.</p>
       <div className="mt-8 space-y-4 text-tinta">
         <label className="block">
           <span className="mb-2 block text-sm text-papel/70">E-mail institucional</span>
-          <input type="email" name="email" autoComplete="username" required className={campo} />
+          <input type="email" name="email" autoComplete="off" required className={campo} />
         </label>
         <label className="block">
           <span className="mb-2 block text-sm text-papel/70">Senha</span>
           <span className="relative block">
-            <input type={ver ? "text" : "password"} name="senha" autoComplete="current-password" required className={`${campo} pr-14`} />
+            <input type={ver ? "text" : "password"} name="senha" autoComplete="new-password" required className={`${campo} pr-14`} />
             <button type="button" onClick={() => setVer(!ver)} className="absolute right-3 top-1/2 grid size-10 -translate-y-1/2 place-items-center rounded-full text-cinza hover:text-tinta"
               aria-label={ver ? "Ocultar senha" : "Mostrar senha"}>
               {ver ? <EyeOff className="size-4" aria-hidden /> : <Eye className="size-4" aria-hidden />}

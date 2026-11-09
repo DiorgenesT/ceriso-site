@@ -23,7 +23,7 @@ const fotos = {
 
 // Retratos da diretoria (_ref/diretoria), recortados em 4:5 a partir do topo.
 // Fontes: Matheus Marum, retrato oficial do mandato 2025–2028 (site da Prefeitura de Salto de
-// Pirapora; recorte sem a moldura); Nykison Linhares, site da Fundação Beta (foto de palco);
+// Pirapora; recorte sem a moldura); Nykson Marques, site da Fundação Beta (foto de palco);
 // Osmar Pasqualino, página do Gabinete (Prefeitura de Pereiras); Mário Pires,
 // página do Gabinete (Prefeitura de Ibiúna); Berto Filho, quadro da entrevista à TVS+ (jul/2025),
 // provisório até o CERISO enviar o retrato oficial; José Carlos de Quevedo Jr., foto de candidato

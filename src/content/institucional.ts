@@ -71,7 +71,7 @@ export const marcos = [
 export type Dirigente = { nome: string; cargo: string; municipio: string; foto?: string };
 
 // Diretoria 2025–2027: notícia de posse publicada no site do CERISO ("Portal").
-// Secretário Executivo: Nykison Linhares, informado pelo responsável pelo projeto em 31/10/2026.
+// Secretário Executivo: Nykson Marques, informado pelo responsável pelo projeto em 31/10/2026.
 // Os documentos públicos até jul/2026 (PNCP: Contrato 004/2026, Pregão 001/2026) ainda trazem
 // Hélder Sebastião Santos; confirmar a data da nomeação com o CERISO.
 // Fotos: retratos oficiais nos sites das prefeituras (ver scripts/otimizar-imagens.mjs);
@@ -84,7 +84,7 @@ export const diretoria: { mandato: string; membros: Dirigente[] } = {
     { nome: "Osmar Pasqualino Rodrigues Ramos Júnior", cargo: "Vice-presidente", municipio: "Pereiras", foto: "/img/diretoria/osmar-pasqualino.webp" },
     { nome: "Antônio Valdecir Berto Filho", cargo: "Vice-presidente de Controle de Obras, Projetos e Convênios", municipio: "Laranjal Paulista", foto: "/img/diretoria/berto-filho.webp" },
     { nome: "Mário Pires de Oliveira Filho", cargo: "Vice-presidente de Assuntos Intermunicipais e Comitê da Bacia", municipio: "Ibiúna", foto: "/img/diretoria/mario-pires.webp" },
-    { nome: "Nykison Linhares", cargo: "Secretário Executivo", municipio: "CERISO", foto: "/img/diretoria/nykison-linhares.webp" },
+    { nome: "Nykson Marques", cargo: "Secretário Executivo", municipio: "CERISO", foto: "/img/diretoria/nykison-linhares.webp" },
   ],
 };
 
