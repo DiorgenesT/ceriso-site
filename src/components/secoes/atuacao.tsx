@@ -43,7 +43,7 @@ export function Atuacao() {
         <div className="shrink-0 lg:w-[36vw] lg:pr-12">
           <Rotulo className="mb-6 text-rio-claro">(02) Soluções compartilhadas</Rotulo>
           <TituloAnimado className="titulo-display text-[clamp(2.6rem,5vw,5rem)]">
-            Contratar junto, <span className="text-rio">pagar menos.</span>
+            Contratar junto, <span className="text-rio">planejar melhor.</span>
           </TituloAnimado>
           <p className="mt-8 max-w-sm text-papel/60">
             Licitações próprias do consórcio, publicadas no PNCP, que os municípios usam conforme a necessidade.
